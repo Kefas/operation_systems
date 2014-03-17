@@ -1,0 +1,94 @@
+1.
+Executable programs or shell commands
+System calls
+Library calls
+Special files
+File formats and conventions
+Games
+Macro packages and conventions
+System administration commands
+Kernel routines
+
+2.
+NAME,SYNOPSIS,DESCRIPTION,OPTIONS,FILES,SEE ALSO, BUGS, AUTHOR
+
+3.
+pogrubiony - wprowadź tak jak pokazano
+[-abc] - argumenty są opcjonalne
+[wyrażenie] - całe wyrażenie w [] można powtarzać
+podkreślenie??
+
+4.
+
+
+
+
+5.
+-k  == odpowiedniek --aprops.  Wyszukuje  krótki  opis stron podręcznika
+              pasujących dla zadanych słów kluczowych  i  wyświetla  wszystkie
+              dopasowania.
+-f ==  Odpowiednik --whatis. Wyświetla krótki  opis  strony  podręcznika,
+              jeśli jest dostępna
+-a, --all
+              Domyślnie man zakończy  działanie  po  wyświetleniu  najbardziej
+              odpowiedniej strony podręcznika, jaką znajdzie. Użycie tej opcji
+              spowoduje, że man pokaże wszystkie dostępne strony  podręcznika,
+              których nazwy odpowiadają kryteriom wyszukiwania.
+
+
+6.
+
+
+7. man 1 man
+   man 0 man
+
+
+9. apropos printf
+   whatis printf
+
+III
+1.
+ #include <errno.h>
+2.
+perror - print a system error message, #include <stdio.h> (kod błędu)
+strerror - return string describing error number, #include <string.h>
+3. EXIT_SUCCESS i  EXIT_FAILURE
+
+IV
+1. -Wall : This enables all the warnings about constructions that some users
+           consider questionable, and that are easy to avoid (or modify to
+           prevent the warning), even in conjunction with macros.
+
+-c  : kompiluje lub asembluje ale nie linkuje
+
+2.
+ gcc -Wall -ansi -pedantic modul1.c modul2.c ... modulN.c -o program
+lub równolegle
+$ gcc -c -Wall -ansi -pedantic modul1.c -o modul1.o
+$ gcc -c -Wall -ansi -pedantic modul2.c -o modul2.o
+...
+$ gcc -c -Wall -ansi -pedantic modulN.c -o modulN.o
+$ gcc modul1.o modul2.o ... modulN.o -o program
+
+3. makefile
+
+4. można również wymusić uruchomienie dowolnego celu z pliku Makefile, podając cel explicite: make cel
+
+5. Niektóre z reguł w pliku Makefile nie muszą być związane z samą kompilacją, ale czynnościami pomocniczymi. Są to tak zwane cele “pozorne” (ang. phony). Phony wywołuje się np tak: .PHONY: clean  Wtedy po wpisaniu make w konsole plik sie skompiluje wg regula jaka napisalismy i dodatkowo wykonoa cel pozorny czyli clean, czyli od razu posprząta.
+
+
+6. standardy systemu
+
+nie napisałem skryptu, taki kozak nie jestem ale poprawiłem go ( zad. 3) chodzi o to, że sysconf( zmienna ) zwraca -1 jeżeli zmienna jest zdefiniowana ale nie ma określonej wartości, dlatego dodałem do skryptu if( r == -1)..
+
+co do basha to parę spraw:
+" co jest w pazurkach jest interpretowane: czyli \n to enter a nie znak \n ( jeżeli chcemy otrzymac \n to musimy napisać \\n)"
+'to co jest w apostrofach zwykłych nie jest interpretowane, po prosu przepisywane \n to \n i koniec;
+`apostrofy pochyłe powodują że możesz wywoływać polecenia systemowe np: echo "Jagienka + `pwd`" UWAGA - muszą być " " bo ` ` muszą zostać zinterpretowane a w ' ' nie zostaną.
+
+make już nie piszę, bo to wiesz jak zrobić ;*
+
+
+
+
+

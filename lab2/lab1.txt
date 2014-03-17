@@ -1,0 +1,42 @@
+1.
+Co to są deskryptory plików?
+- Identyfikator pliku wykorzysytywany przez system operacyjny. Po wykonaniu operacji otwarcia pliku może być wykorzysytywany wielokrotnie przez wywołania systemowe w operacjach wejścia/wyjścia.
+
+Jakie są standardowe deskryptory otwierane dla procesów? 
+0 - STDIN
+1 - STDOUT
+2 - STDERR
+
+Jakie flagi trzeba ustawić w funkcji open aby otrzymać funkcjonalność funkcji creat?
+- O_CREAT
+
+W wyniku wykonania polecenia umask otrzymano 0022. Jakie prawa dostępu będzie miał plik otwarty w następujący sposób:
+open(pathname, O_RDWR | O_CREAT, S_IRWXU | S_IRWXG | S_IRWXO)
+
+- prawda dostępu tuuugggooo
+t- typ pliku
+u - uprawnienia user(własciciel)
+g - uprawnienia grupy
+o - uprawnienia innych
+
+- na początek: co to jest umask?
+  - umask jest pomocne przy zakładaniu nowych plików ( jeżeli wpiszesz w terminal umask to Ci się pojawi jakaś liczba, ta liczba to tzw. maska ). Każdy plik jak tworzysz to ma określone prawa dostępu domyślne (maksymalne prawa: rwx-rwx-rwx (read,write,execute) czyli 111-111-111 czyli 7-7-7). Domyślne prawa są ustawiane poprzez właśnie umask,  prawa dostępu się wylicza ze wzoru: (jeżeli umask == 022 ) 777 & ~022 ( logiczny AND ) czyli 111-111-111 & 111-101-101 = 111-101-101 = 755.
+
+S_IRWXU ( Read Write eXecute User) 00700 - prawa dostępu użytkownika
+S_IRWXG ( Read Write eXecute Group) 00070 - prawa dostępu grupy
+S_IRWXO ( Read Write eXecute Others) 00007 - prawa dostępu innych
+
+czyli uprawnienia jakie chcemy nadać to 777
+maska - 022
+zatem 777 & ~022 = 755
+
+Flagi
+
+- O_WRONLY - WRite ONLY - otwórz plik do pisania
+- O_CREAT - Jeżeli plik nie istnieje - stwórz go
+- O_TRUNC - Jeżeli plik istniej to zmniejsz jego długość do 0
+- O_APPEND - Spowoduje aby wszystkie operacje pisania odbywały się na końcu pliku
+
+Co oznacza zapis: S_IRUSR | S_IWUSR?
+- S_IRUSR - Read USeR - 100 = 4 
+- S_IWUSR - Write USeR - 010 = 2

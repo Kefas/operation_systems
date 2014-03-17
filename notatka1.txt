@@ -1,0 +1,16 @@
+Rozdział 1
+
+1. Pliki zwykłe - ciąg bajtów ( tablica liniowa ), można dodawać bajty lub odejmowac tylko z poczatku lub z konca. Dwa lub więcej procesów ma dostęp do pliku. Pliki zwykłe nie mają nazw, przypisane są im tylko numery zwane i-numerami, ktore sa indeksami tablicy i-wezlow. Kazdy i-wezel zawiera informacje o pliku (nie zawiera nazwy i bajtow danych ) typ dpliku, liczbe dowiazan, identyfikator grupy, prawa dostepu, wielkosc pliku, czasy modyfikacji, wskaznik do bloku pamieci zawierajecej tresc pliku
+
+2. Katalogi - każdy składa się z tablicy o dwóch kolumnach. Jedna kolumna zawiera nazwe pliku a druga odpowiadajacy nazwie i - numer. Para nazwa,i-numer = dowiazanie. 
+
+3. Pliki specjalne - albo pewien rodzaj urządzenia albo kolejka FIFO stanowiąca mechanizm do przekazywania informacji między procesami
+
+4 Programy i procesy
+- Program - jest to zestaw instrukcji i danych przechowywanych na dysku w postaci zwykłego pliku. W i-węźle takiego pliku musi znajduje sie oznaczenie że jest on wykonywalny. Struktura pliku musi być zgodna z regułami określonymi przez jądro systemu. W celu uruchomienia programu system musi stworzyć nowy proces czyli środowisko w którym program będzie wykonywany.
+- Proces - ciąg działań podjętych przez procesor komputera pod kontrolą jądra systemu operacyjnego.
+
+5. Sygnały - Jądro systemu może przesyłać do procesu sygnały, syngał może pochodzić od samego jądra, od użytkownika, od tego samego lub innego procesu. Przykłady: od jądra gd przekroczenie segmentu ( access violation ),  przez samego siebie - syngał pobudki. Jeden przez drugiego to sygnał zakończenia, od użytkownika - sygnał przerwania np esc albo del.
+istnieje 19 rodzajów sygnałów ( +- kilka ). Dwa sygnału pozostały niezdefiniowane przez jądro systemu aby można było je wykorzystać do własnych celów.
+
+6. Identyfikatory procesów i grupy procesów.

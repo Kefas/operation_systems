@@ -21,7 +21,7 @@ void backward(char *path)
   i = sizeof(s) - 1;
   s[i] = '\0';
   do {
-    /* where = lseek(fd, -2, SEEK_CUR); */
+    where = lseek(fd, -2, SEEK_CUR);
     
     /* switch (read(fd, &c, 1)) { */
     switch( where = pread(fd, &c, 1, 2)){

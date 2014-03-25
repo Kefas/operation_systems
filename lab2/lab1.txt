@@ -77,8 +77,3 @@ lseek(deksryptor, pozycja, 0);
 lseek(desktyptor, 0L, 2);
 -zwraca bieżącą pozycję wskaźnika?
 lseek(dekstyptor,0L,1);
-
-
-
-
-

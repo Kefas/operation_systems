@@ -1,0 +1,35 @@
+1. Proszę przejrzeć manual do funkcji z rodziny stat(2). Czym różnią się te funkcje?
+
+- pokazują informację o pliku
+
+róznice:
+lstat - to samo co stat tylko że jeżeli wykonujemy je na dowiązaniu symbolicznym to pokazuje stat dowiązania a nie pliku do którego jest dowiązaniem
+fstat - to samo co stat tylko że przyjmuje deskryptor do pliku zamiast ścieżki
+
+Pole st_mode składa się z bitów które oznaczają typ pliku, prawa dostępu oraz kilka innych atrbutów
+
+Co reprezentuje flaga S_IFMT zdefiniowana dla pola st_mode?
+- wszystkie bity typu pliku
+
+Czy można sprawdzić typ pliku (np. czy plik jest urządzeniem blokowym) w następujący sposób?
+if ((sb.st_mode & S_IFBLK) == S_IFBLK) {/* plik jest urządzeniem blokowym */} 
+
+Nie można gdyż S_IFBLK nie jest maską bitową lecz wartością tych bitów.
+
+getpwnam i getpwuid zwraca wskaźnik do struktury passwd zaiwierającej informację o użytkowniku
+
+getgrnam, getgrgid zwraca wskaźnik do struktury group
+
+getlogin - zwraca aktualnie zalogowanych użytkownwików
+
+aio_read aio_write asynchroniczne operacje czytania i pisania, program nie czeka aż ta operacja się zakończy tylko leci dalej z wykonywaniem instrukcji.
+Obie funkcje przyjmują jako argument struct aiocb która jest blokiem kontrolnym.
+Używanie:
+char buf1[512], buf2[512];
+struct aiocb cb;
+memset(%cb,0,sizeof(cb)); // zerowanie całej struktury
+cb.aio_fildes = STDIN_FILEN0 // deskryptor pliku
+cb.aio_buf = buf2
+cb.aio_bytes = sizeof(buf2);
+cb.aio_sigevent.sigev_notify = SIGEV_NONE;
+

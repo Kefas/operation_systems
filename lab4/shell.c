@@ -1,4 +1,6 @@
     #include "funcs.h"
+#include <stdlib.h>
+#include <signal.h>
     /* -------------------------------------------------------------------------------------- */
      
     int main(void)
@@ -23,7 +25,9 @@
        */
       while(1){
         printprompt();
+	 
         if(readcmd(cmd, MAXCMD) == RESERROR) continue;
+ 
         res = parsecmd(cmd, MAXCMD, &cmds);
         /* printparsedcmds(&cmds); */
         executecmds(&cmds);
@@ -75,7 +79,7 @@
         printf("Error while reading -- try again!");
         return RESERROR;
       }
-     
+      
       /* If the std input buffer is not empty */
       /* In this case we did not read all the data from the buffer, 
          so the incomplete command should not be executed
@@ -101,7 +105,7 @@
       char* cmd = __buf;                  /* String that must be parsed  */
       char* word;                         /* String between white characters  */
       struct cmdlist* curr = __head;
-     
+  
       /* Reading next word - read strtok(3)  */
       while((word = strtok(cmd, " \t\n")) != NULL){ 
         curr->argc++;
@@ -126,25 +130,55 @@
     /* 4. Executing parsed commands */
     int executecmds(struct cmdlist* __head)
     {
-      int f, e;
+      int f, e, status,procres=1;
+      char ch[5];
       struct cmdlist* curr = __head;
-     
       while(curr != NULL){
         f = fork();
         e = errno;
-     
+
+	
+	if(strcmp(curr->argv[0],"exit") == 0){
+	  exit(0);
+	  return RESSUCCESS;
+	}
+      
         if(f == 0){
           execvp(curr->argv[0], curr->argv);
           e = errno;
           printf("Error while executing: %s", strerror(e));
-        }
+	  exit(1);
+	}
+
         if(f == -1){
           printf("Fork error: %s", strerror(e));
           return RESERROR;
         }
+	else{
+	  wait(&status);
+	  if(WIFEXITED(status)){
+	    if(WEXITSTATUS(status) == 
+	    procres = 1;
+	  else 
+	    procres = 0;
+	  }
+	  else
+	    procres = 0;
+	  
+	  write(1,  ch, 4);
+	  /*printf(" #%d",procres);*/
+	}
         curr = curr->next;
       }
+      
       return RESSUCCESS;
+      
     }
     /* -------------------------------------------------------------------------------------- */
 
+/*
+  1. poprawiæ b³edy
+  2. 
+
+
+ */

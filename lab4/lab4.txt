@@ -1,8 +1,9 @@
 Co to jest fork i jakie wartości zwraca?
-- Fork jest funkcją w systemie operacyjnym unix ( i nie tylko ) powodującą, że pojdynczemu programowi. któremu do tej chwili był przypisany pojedynczy proces, przypisuje się dwa procesy poprzez rozwidlenie rodzic - dziecko. Fork tworzy nowy proces, w chwili tworzenia proces dziecko jest kopią procesu rodzica (kopiowane są obszary pamieci, wartości zmiennych i część środowiska). Aby umożliwić sprawdzenie zidentyfikowanie procesu fork zwraca konkretną wartośc liczbową która wynosi:
+- Fork jest funkcją w systemie operacyjnym unix ( i nie tylko ) powodującą, że pojedynczemu programowi któremu do tej chwili był przypisany pojedynczy proces, przypisuje się dwa procesy poprzez rozwidlenie rodzic - dziecko. Fork tworzy nowy proces, w chwili tworzenia proces dziecko jest kopią procesu rodzica (kopiowane są obszary pamieci, wartości zmiennych i część środowiska). Aby umożliwić sprawdzenie zidentyfikowanie procesu fork zwraca konkretną wartośc liczbową która wynosi:
 -1 gdy nie powiedzie się tworzenie procesu dziecka do macierzystego
 0 do dziecka
 id_procesu dziecka do procesu macierzystego 
+( fork nie rozpoczyna programu od nowa, wykonuje go od tej linijki gdzie był fork() ( coś jak rozwidlenie ))
 
 Co to jest exec?
 -W ramach istniejącego procesu może nastąpić uruchomienie innego programu w wyniku wywołania jednej z funkcji systemowych z rodziny exec: execl, execlp, execle, execv, execvp, execve. Bezbłędne wykonanie funkcji exec oznacza bezpowrotne zaprzestanie wykonywania bieżącego programu i rozpoczęcie wykonywania programu, którego nazwa j st przekazana przez argument. 
@@ -13,7 +14,7 @@ Czy można utworzyć dowiązanie twarde do zasobu na innym urządzeniu?
 Czym się różni program od procesu?
 -Proces ma środowisko wykonania, program to tylko zbiór instrukcji.
 
-Jak wywyołac exec tak zeby zamknąć wszytskie descryptory pliku wcześniejszego procesu?
+Jak wywyołac exec tak zeby zamknąć wszytskie deskryptory pliku wcześniejszego procesu?
 - przed wywolaniem execa nalezy wywolac funkcje fcntl(fd, F_SETFD, flags | FD_CLOEXEC) dla wszystkich otwartych deskryptorow. w przypadku wywolania funkcji exec zostana one zamkniete. 
 
 Co zwracają funkcje z rodziny exec.

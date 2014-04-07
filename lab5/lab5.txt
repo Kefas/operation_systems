@@ -1,0 +1,15 @@
+1. Różnica między zwykłym procesem a wątkiem polega na współdzieleniu przez wszystkie wątki działające w danym procesie przestrzeni adresowej oraz wszystkich innych struktur systemowych (np. listy otwartych plików, gniazd, itp.) - z kolei procesy posiadają niezależne zasoby.
+
+2. pthread_create-
+tworzy nowy wątek, który wykonuje się współbieżnie z wątkiem wywołującym funkcję. Nowy wątek rozpoczyna działanie od funkcji 'start_routine', natomiast kończy poprzez wyjście z tej funkcji lub wywołanie pthread_exit(). Funkcja pthread_create() kończy działanie natychmiast i wątek wywołujący wznawia działanie od kolejnej instrukcji po wywołaniu tej funkcji. W międzyczasie nowy wątek rozpoczyna realizację funkcji wątku. Wątki przełączane są asynchronicznie, tak więc kod programu nie może zależeć od kolejności wykonania wątków. 
+
+error=(int)pthread_create( (pthrad_t *)thread, (pthread_attr_t *)attr, ((void *)(*)(void *))start_routine, (void *)arg );
+
+3. pthread_join
+opis: czekanie na zakończenie innego wskazanego wątku. pthread_join() zawiesza wykonanie wątku wywołującego tą funkcję do czasu aż wątek powiązany ze wskazanym identyfikatorem zostanie zakończony.
+
+
+4. Zmienne warunkowe:
+Funkcja pthread_cond_signal wznawia jeden z watkow oczekujacych na zmiennej warunkowej cond. Jesli zaden watek nie czeka na tej zmiennej, to nic sie nie dzieje. Jesli wiecej niz jeden watek oczekuje na cond, dokladnie jeden jest wznawiany, jednak nie jest wyspecyfikowane ktory.
+
+Funkcja pthread_cond_wait w sposob atomowy zwalnia mutex (tak jak przez pthread_unlock_mutex) i oczekuje na sygnal o spelnieniu zmiennej warunkowej cond. Wykonywanie watku jest zawieszane i nie zajmuje czasu procesora az do odebrania sygnalu zmiennej warunkowej. Mutex musi byc zajety przez watek wolajacy pthread_cond_wait. Przed koncem dzialania pthread_cond_wait zajmuje mutex (tak jak przez pthread_lock_mutex).

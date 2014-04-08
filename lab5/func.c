@@ -46,9 +46,11 @@ int main (int argc, char *argv[]){
      
   for(i=0;i<NUM;i++){
     // tworzenie watkow
-    rc = pthread_create(&threads[i], &attr, calc,(void*) &i);
-    pthread_join(threads[i], &status);
+    rc = pthread_create(&threads[i], &attr, calc,(void*) i);
+    
   }
+  for(i=0;i<NUM;i++)
+    pthread_join(threads[i], &status);
  
   //[1] destroy - not needed anymore
   pthread_attr_destroy(&attr);
@@ -72,7 +74,7 @@ void* calc(void* arg)
   long mysum = 0;
   int i;
  
-  int y = *((int*)arg);
+  int y = (int)arg;
   
   printf("y = %d\n", y);
   int start = y*(LENGTH*NUM/NUM);

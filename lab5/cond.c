@@ -27,8 +27,8 @@ int main(){
   pthread_attr_init(&attr);
   pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
      
-  pthread_create(&t1, &attr, increment, NULL); 
-  pthread_create(&t2, &attr, increment, NULL);
+  pthread_create(&t1, &attr, increment, (void*)1); 
+  pthread_create(&t2, &attr, increment, (void*)2);
   pthread_create(&t3, &attr, printinfo, NULL);  
      
   pthread_join(t1, NULL);
@@ -45,14 +45,13 @@ int main(){
      
 void* increment(void* arg) {
   while(1){
-    pthread_mutex_lock( &mutex );
-    
-    
+    pthread_mutex_lock( &mutex );   
     if(globalvariable == MAXVAL){
       pthread_cond_signal(&cond);
       pthread_mutex_unlock( &mutex);
-      pthread_exit(NULL);
+      break;
     }
+    printf(" Thread no %d\n", (int)arg);
     globalvariable++;
     
     pthread_mutex_unlock( &mutex);

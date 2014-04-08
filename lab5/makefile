@@ -9,6 +9,11 @@ func: func.c
 
 cond: cond.c
 	$(CC) $(FLAGS) $^ -o cond
+
+randomsearch: randomsearch.c
+	$(CC) $(FLAGS) $^ -o randomsearch
+
+
 clean:
 	rm -f *.o
 	rm -f *~

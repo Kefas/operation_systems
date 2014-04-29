@@ -1,0 +1,19 @@
+1. Czy mozemy jednoczesnie pisac i odczytywac.
+Tak, ale nie moze tego robic jeden i ten sam proces.
+
+Jezeli chcemy miec komuniakcje dwustronna to potrzebujemy dwoch potokow
+
+Potok realizowany jest jako bufor cykliczny.
+Przy przepelnieniu bufora nie dostaniemy wyjatku. Tylko zostana nadpisane dane na poczatku.
+
+Istotna wiec jest kwestia synchronizacja szybkosci pracy procesow komunikujacych sie.
+
+Nie moga byc dwa procesy niespokrewnione bezposrednio korzystac z lacza nienazwanego. ( bo deskryptora nie dostaniesz ).
+
+
+Problem dwóch eskimosów i igloo
+Dwóch eskimisów nie moze byc w igloo.
+Sprawe mozna rozwiazac za pomoca 3 zmiennych.
+
+eskimos najpierw czyta ze zmiennej drugiego ( czy zajete ), potem jezeli nie zajete to wpisuje w swoja zmienna ze zajmuje igloo i wchodzi.
+w przypadku zakleszczenia eskimosow przydatna jest 3. zmienna ktora decyduje czyja kolej w razie zakleszczenia. Algorytm Dekkera.

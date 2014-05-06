@@ -1,0 +1,3 @@
+Semafor jest licznikiem który zapobiega temu, aby dwa albo większa liczba procesów lub wątków miała jednoczesny dostęp do wspólnych zasobów.
+Semafor dwójkowy ma tylko dwa stany.
+Semafor ogólny - nieskończoną.

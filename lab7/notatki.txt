@@ -1,0 +1,35 @@
+Pamięć dzielona 
+- kolejny zasób umożliwiający komunikację międzyprocesową.
+- jeden z najszybszych i najtrudniejszych sposobów.
+- polega na utworzeniu obszaru pamięci do którego będzie miało dostęp wiele procesów.
+- zaletą jest szybkość ( nie trzeba kopiować dodatkowo wysyłanych danych ( jak w przypadku potoków) i nie następuje częsta zmiana konteksty wykonywania jądra)
+
+Utworzenie pamięci dzielonej:
+
+share memory get
+int shmgt(key_t key, int size, int shmflg) - powoduje utworzenie pamięci dzielonej o podanym kluczu key oraz wielkości size, shmflg - share memory flag
+shmflg - IPC_CREAT- normalna, IPC_PRIVATE - unikalna pamięć dzielona
+przykład:shmid=shmget(IPC_PRIVATE,30,IPC_CREAT|0660) // dla pamieci dzielonej przez procesy spokrewnione
+         shmid = shmget((key_t)1234, sizeof(shm_struct), 0666 | IPC_CREAT); // pamiec dzielone przez niespokewnione procesy
+
+Po utworzeniu pamięci dzielonej należy pamiętać aby stworzyć również dowiązania do tej pamięci.
+
+void *shmat(int shmid, void *shmaddr, int shmflg); //powoduje dowiązanie wskazanego segmentu pamięci dzielonej do przestrzeni danych wywołującego ją procesu.
+
+    shmid – identyfikator pamięci dzielonej.
+    shaddr – identyfikuje sposób utworzenia dowiązania – najczęściej wartość 0.
+    shmflg – określa prawa do dowiązywanego obszaru. Domyślnie ( wartość 0) obszar jest ustawiony z prawami do zapisu i odczytu.
+przykład: shm = (char *)shmat(shmid, 0, 0))
+
+Po użyciu usuwanie dowiązań:
+
+int shmdt( *shm_addr); // powoduje usunięcie dowiązania o podanym adresie
+
+Pamięć dzielona nie jest usuwana automatycznie więc nalezy pamiętać o usunięciu jej po zakończeniu działania procesu.
+Najlepiej żeby usuwał ją ten proces który ją wywołał.
+
+int shmctl(int shmid, int cmd, struct shmid_ds *buf); // sluzy do wykonywania operacji na pamięci dzielonej.
+
+shmctl(shmid, IPC_RMID, 0); // należy zauważyć że w rzeczywistości usunięcie pamięci nastąpi dopiero gdy wszystkie procesy odłączą się od pamięci dzielonej za pomocą shmdt.
+
+

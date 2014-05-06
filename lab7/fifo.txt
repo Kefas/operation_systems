@@ -1,0 +1,18 @@
+Kolejki FIFO - łącza nazwane
+
+- komunikacja polega na stworzeniu specjalnego pliku który ma służyś jako łacznik między procesami ( nie musza być spokrewnione ).
+- mogą żyć dłużej niż procesy
+- komunikacja jednokierunkowa
+- domyślnie otwarcie łącza jest operacją blokującą. Proces po otwarciu łącza do czytania czeka aż drugi proces otworzy do pisania.(lub odwrotnie) (jeżeli otworzymy łącze jednocześnie do czytania i pisania to tak jak w przypadku łącz nienazwanych, nie będzie blokowane łącze.)
+
+
+mknod(const char* path, mode_t perms, dev_t dev); - bardziej ogólne
+mkfifo(const char* path, mode_t perms);
+
+- funkcja tworzy (ale nie otwiera) pliku typu kolejka fifo
+- w przeciwieństwie do łącz nienazwanych, nie są usuwane automatycznie po zakończeniu procesu, trzeba wywołać jawnie unlink(cons char* path);
+
+- służą do komunikacji tylko miedzy dwoma procesami
+- gdy komunikat jest za długi to proces piszący dane może zostać zablokowany.
+- z jednej kolejki fifo nie moze pobierac wiele procesow ( poniewaz nie ma gwarancji ze operacje czytania beda atomowe)
+

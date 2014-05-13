@@ -1,0 +1,1 @@
+Hmm.. prawie to samo co sysV tylko, że nie jest obowiązkowy w certyfikowanych systemach UNIX.. 

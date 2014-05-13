@@ -21,7 +21,7 @@ struct message
 
 void make_srv_fifo_queue_name(char* dest, char* basename, size_t namemax)
 {
-  snprintf(dest, namemax, "fifo_piokon", "");
+  snprintf(dest, namemax, "fifo_%s", getlogin());
 }
 /* ------------------------------------------------------------- */
 

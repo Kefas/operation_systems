@@ -1,0 +1,33 @@
+System V określa zbiór funkcji systemowych służących komunikacji międzyprocesowej.
+
+Istnieją 3 rodzaje obiektów uczestniczących w komunikacji międzyprocesowej:
+- kolejki komunikatów
+- zbiory semaforów
+- segmenty pamięci wspólnej
+Nie są to pliki! Są to obiekty które mają specjalny schemat tworzenia.
+
+Obiekty te istnieją tylko w obrębie maszyny - nie można ich używać do komunikacji z innymi maszynami.
+Dostęp otrzymuje się za pomoca identyfikatora ustalonego na cały czas trwania obiektu.
+Każdy proces który zna id obiektu może się z nim połączyć, nie musi go otwierać.
+Nie ma i-węzłów, nazw.. nie można użyc open, read, write,close, unlink
+
+wszystkie funkcje odnoszące się do obiektów mają postać:
+Xget oraz Xctl
+X - msg, sem, sbm
+Pondadto 5 dodatkowych
+msgsend, msgrcv - wysyłanie i odbieranie komunikatów
+semop - do działania na semaforach
+shmat smdt -  do przyłączania i odłączania segmentów pamięci wspólnej
+
+Identyfikator jest wyznaczany przez jądro systemu podczas tworzenia obiektu co oznacza, że po każdym ponownym utworzeniu id bedzie inne.
+Można użyć kluczy key_t <sys/types.h> za pomocą Xget można pobrać id za pomocą klucza jezeli obiekt istnieje
+ftok służy do generowania kluczy.
+
+ipcs - wypisanie obiektów sysV
+ipcrm - kasowanie obiektow sysV
+
+jezeli jakiś obiekt ma klucz 0 to oznacza, że jest utworzony bez podania klucza a z argumentem IPC_PRIVATE
+
+Plusy są takie, że są spoko, działają szybko, nie trzeba się martwić o to czy operacje czytania/pisania sa atomowe.
+
+Minusy takie,że: ciężko znaleźć informację o ograniczeniach. Działają tylko w obrębie maszyny

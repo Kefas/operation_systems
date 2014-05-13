@@ -1,0 +1,20 @@
+Łącze nienazwane.
+
+- Łącze umożliwia komunikację jednokierunkową.
+- działają na zasadzie kolejki fifo ( tzn. odbiorca odbiera w takiej kolejnosci jak nadawca nadał).
+- mają ograniczoną pojemność ( zazwyczaj wielokrotność 512b - zależne od systemu operacyjnego)
+- bufor jest cykliczny ( tzn. jeżeli chcemy zapisać więcej niż wynosi rozmiar to nadpiszemy to co jest na początku ).
+- są realizowane jako obiekty tymczasowe w pamięci jądra
+- mogą z niego korzystać tylko procesy spokrewnione
+
+int pipe(int fd[2]);
+
+- przy komunikacji każdy z procesów powinien zamknąć nieużywany deskryptor int close(int fd);
+- jeżeli chcemy przeprowadzić komunikacją dwukierunkową to potrzebujemy dwóch łączy nienazwanych
+- nie mogą żyć dłużej niż procesy
+
+przydatne:
+
+int dup(int fd);
+int dup2(int fd, int fdcopy);
+

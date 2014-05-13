@@ -19,7 +19,8 @@ int main(void)
   int fdsrv,
     fdcnt,
     bread,
-    bwrite;
+    bwrite,
+    fdsrv_w;
   
   printf("Server started...\n");
   setbuf(stdout, NULL);
@@ -35,12 +36,26 @@ int main(void)
 
   /* Opening fifo */
   printf("OK\nOpening server fifo queue \'%s\' for reading...", fifosrvname);
-  fdsrv = open(fifosrvname, O_RDONLY);
+  /* O_NONBLOCK - added */
+  fdsrv = open(fifosrvname, O_RDONLY|O_NONBLOCK);
   if(fdsrv == -1)
     {
       printf("FAIL!\nError: \'%s\'\n", strerror(errno));
       return 0;
     }
+ //*********************************************************
+  //przywrócenie blokowania
+  int flags= fcntl(fdsrv,F_GETFL);
+  flags &= ~O_NONBLOCK;
+  fcntl(fdsrv,F_SETFL,flags);
+  //otworzenie do zapisu
+  fdsrv_w = open(fifosrvname, O_WRONLY);
+  if(fdsrv_w == -1)
+    {
+      printf("FAIL!\nError: \'%s\'\n", strerror(errno));
+      return 0;
+    }
+  //*********************************************************
   printf("OK\n");
 
   while(1)

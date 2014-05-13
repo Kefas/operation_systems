@@ -1,0 +1,17 @@
+Kazde wejscie to semafor binarny miedzy opuszczeniem a podniesieniem bedzie nastapelowala dekrementacja lub inkrementacja licznika miejsca w ulu.
+skladanie jaj powoduje zalozenia semafora na oba wejscia.
+
+Ul moze byc w pamieci dzielonej w ktorej znajdzie sie:
+ilosc pszczol w ulu
+kolejke do ula
+kolejke z ula
+
+Kazda pszczola ma swoj numer (pid), dlugosc zycia, 
+
+w mainie:
+ 
+while( ilosc_pszczol > 5 ){
+
+}
+
+

@@ -1,0 +1,46 @@
+door(2), max_bees(MAX_BEES) - semafory ogolne
+hive - mutex
+
+bee
+
+P(max_bees)
+P(door)
+mutex_l(hive)
+bees_in++
+mutex_u(hive)
+V(door)
+
+...
+
+P(door)
+mutex_l(hive)
+bees_in--
+mutex_u(hive)
+V(door)
+V(max_bees)
+
+
+if( pszczola przekroczyla limit odwiedzin w ulu)
+   mutex_l(hive)
+   n_bees--
+   mutex_u(hive)
+   pthread_exit
+
+if( zabijamy najstarsza pszczole i ta pszczola jest najstarsza )
+   mutex_l(hive)
+   n_bees--
+   mutex_u(hive)
+   pthread_exit
+
+
+queen:
+
+if( zabijamy krolowa)
+  pthread_exit
+
+for i : random
+   mutex_l(hive)
+   n_bees++
+   mutex_u(hive)
+   pthread_create(bee)
+   

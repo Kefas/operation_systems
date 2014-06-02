@@ -183,7 +183,7 @@ int main(void){
       }
             
       
-      
+      close(fdcnt);
     }
     
     /*write(fdcnt,0,0);*/

@@ -1,0 +1,31 @@
+mutexy: room, policeman, secure;
+
+policeman:
+
+mutex_l(secure)
+if( num_con = 0 | num_con > 7 ) <- odpowiednia ilosc spiskowcow
+   mutex_u(secure)
+   mutex_l(policeman)
+   mutex_l(room)
+
+if( num_con = 0) <- wszyscy wyszli
+   mutex_u(room)
+   mutex_u(policeman)
+mutex_u(secure)
+
+
+consiprator:
+
+mutex_l(policeman)
+mutex_l(secure)
+num_con++
+if(num_con = 1)
+   mutex_l(room)
+
+mutex_u(policeman)
+
+mutex_l(secure)
+num_con--
+if(num_con = 0)
+   mutex_u(room)
+mutex_u(secure)

@@ -18,7 +18,7 @@ void* writer(void *arg){
      
     
     pthread_mutex_lock(&writer_m);   
-    printf("Writeer %d is writing %d\n", (int *) arg, count++);
+    printf("Writer %d is writing %d\n", (int *) arg, count++);
     sleep(1);
 
     pthread_mutex_unlock(&writer_m);

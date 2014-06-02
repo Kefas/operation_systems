@@ -43,7 +43,7 @@ void* lackey(void * arg){
   int last=10;
   int random=-1;
   while(1){
-    printf("Hello and die\n");
+    printf("\n");
 
     sem_wait(&sem);
     sem_wait(&sem);

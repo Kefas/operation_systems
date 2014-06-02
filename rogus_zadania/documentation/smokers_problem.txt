@@ -1,0 +1,29 @@
+sem(3) - semafor ogólny
+turn[3], table - mutexy
+
+smoker (i):
+
+mutex_l(turn[i])
+mutex_l(table)
+
+if( mozliwe_palenie )
+    palenie()
+
+V(sem)
+
+mutex_u(table)
+
+
+lackey:
+
+P(sem)
+P(sem)
+P(sem)
+
+wybor_skladnikow()
+
+mutex_u(turn[0])
+mutex_u(turn[1])
+mutex_u(turn[2])
+
+

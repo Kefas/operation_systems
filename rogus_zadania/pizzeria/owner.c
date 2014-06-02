@@ -296,7 +296,7 @@ sendResponse(struct bunch msg, int sem[4]){
 	printf("Message received from client %d\n", msg.id);
 	printf("There is %d people who wants to eat\n", msg.size);
 	sendResponse(msg, sem);
-	for(i=0;i<4;i++){
+	for(i=1;i<4;i++){
 	  for(j=0;j<def_val[i];j++){
 	    if( (ret = semctl(sem[i], j, GETVAL,0)) == -1){
 	      perror("semctl\n");

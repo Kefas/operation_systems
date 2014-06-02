@@ -16,24 +16,27 @@ void* policeman(void* arg){
   while(1){
    /* printf("POL Zamykam secure\n"); */
     pthread_mutex_lock(&secure);
-    if(num_con == 0 || num_con == 7){
+    if(num_con == 0 || num_con >= 7){
       /* printf("POL Otwieram secure\n"); */
       pthread_mutex_unlock(&secure);
-      printf("Policeman in room!\n");
+      
       /* printf(" POL zamykam m_policeman\n"); */
       pthread_mutex_lock(&m_policeman);
+      printf("Policeman in room!\n");
       /* printf("POL Zamykam room\n"); */
       pthread_mutex_lock(&room);
-      printf("Policemen gone!\n");
+      
       
       if(num_con == 0){
 	/* printf("POL otwieram room\n"); */
       pthread_mutex_unlock(&room);
+      printf("Policemen gone!\n");
       /* printf("POL otwieram policjanata\n"); */
       pthread_mutex_unlock(&m_policeman);
       }
     }
     pthread_mutex_unlock(&secure);
+    
     sleep(rand()%2);
   }
 

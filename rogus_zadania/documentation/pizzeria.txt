@@ -1,0 +1,38 @@
+sem[4] - tablica id tablic semaforow majacych tyle elementow ile jest poszczegolnych stolikow, ustawionych na ilosc miejsc stolika
+
+owner.c
+
+stworzenie kolejki serwera
+stworzenie lub pobranie id semaforow
+nadanie semaforom odpowiednich wartosci
+otwarcie kolejki fifo serwera do czytania
+
+pobranie z kolejki serwera informacji od klienta o rozmiarze grupy.
+otwarcie kolejki klienta do pisania
+
+w zaleznosci od rozmiaru grupy, przydzielenie im odpowiednie stolika (grupy semaforow)
+for i : rozmiar_grupy
+   P(sem[x])
+
+wyslanie do kolejki klienta decyzji czy grupa moze usiasc i ktory semafor zajmuja
+
+
+client.c
+
+stworzenie kolejki fifo klienta
+otwarcie kolejki serwera do pisania
+wyslanie do kolejki serwera informacji o rozmiarze grupy przychodzacej do pizzeri
+otwarcie kolejki fifo klienta do czytania
+pobranie informacji z kolejki o mozliwosci pozostania w pizzerii i o numerze semafora
+
+jedzenie()
+
+for i : rozmiar grupy
+    V(sem[x])
+
+zamkniecie kolejki klienta
+
+
+
+
+

@@ -23,6 +23,12 @@ int main(int argc, char* argv[]){
   msg.type = 1;
   msg.tab[0] = 1.5;
   msg.tab[1] = 1.5;
+
+  printf("Podaj pierwszego floata: ");
+  scanf("%f", msg.tab);
+  printf("\n Podaj drugiego floata: ");
+  scanf("%f", msg.tab+1);
+
   printf("klient wysyla\n");
   if(msgsnd(id, &msg, sizeof(struct message), 0) == -1){
     perror("msgsnd");
@@ -40,6 +46,6 @@ int main(int argc, char* argv[]){
     printf("%f * %f = %f", msg.tab[0], msg.tab[1], msg.result);
   }
 
-
+  msgctl(id, IPC_RMID, 0);
   return 0;
 }

@@ -1,0 +1,33 @@
+Server zawiera baze wszystkich tematow, liste tematow poszczegolnych uzytkownikow
+
+server.c
+
+stworzenie kolejki fifo serwera
+otworzenie kolejki fifo serwera do czytania
+
+while(true)
+  if (czytanie przebieglo pomyslnie)
+     otwarcie kolejki dla klienta do pisania
+     wysylanie wiadomosci z bazy danych
+     zamykanie kolejki dla klienta
+
+zamkniecie kolejki serwera
+
+
+client zawiera liste swoich tematow ktora przesyla do serwera
+
+client.c
+otwarcie kolejki serwera do pisania
+
+pobranie_wiadomosci:
+  wyslanie_listy_subskrypcji_na_serwer()
+  odebranie_wiadomosci_z_serwera:
+     utworzenie kolejki klienta
+     otwarcie kolejki klienta do czytania
+     czytanie z kolejki
+     zamkniecie i usuniecie kolejki klienta
+
+
+zamkniecie kolejki serwera
+
+    

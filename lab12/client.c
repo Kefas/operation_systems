@@ -12,7 +12,7 @@
 #include <netinet/in.h>
 #include <sys/socket.h>
      
-#define PORT 58402 // the port client will be connecting to 
+#define PORT 58437 // the port client will be connecting to 
      
 #define MAXDATASIZE 100 // max number of bytes we can get at once 
      
@@ -51,6 +51,16 @@ int main(int argc, char *argv[])
     exit(1);
   }
      
+  /* send(sockfd, "ciul", 4,0); */
+
+  /* if ((numbytes=recv(sockfd, buf, MAXDATASIZE-1, 0)) == -1) { */
+  /*     perror("recv"); */
+  /*     exit(1); */
+  /* } */
+     
+  /* buf[numbytes] = '\0'; */
+     
+  /* printf("Received: %s",buf); */
 	
   if((pid = fork()) == -1)
     perror("fork");

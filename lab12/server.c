@@ -14,7 +14,7 @@
 #include <sys/wait.h>
 #include <signal.h>
      
-#define MYPORT 58402	// the port users will be connecting to
+#define MYPORT 58437	// the port users will be connecting to
      
 #define BACKLOG 10	 // how many pending connections queue will hold
 
@@ -78,11 +78,12 @@ int main(void)
   
   while(1){
     read_set = set;
+    //printf("tu sie zatne\n");
     if( select(fd_hwm+1, &read_set, NULL, NULL, NULL) == -1)
       perror("select");
-  
+    //printf("odciety\n");
     for(fd =0; fd<=fd_hwm;fd++){
-   
+      //printf("teraz tu\n");
       if(FD_ISSET(fd, &read_set)){
 	
 	if(fd == sockfd){
@@ -133,9 +134,12 @@ int main(void)
 	      }
 	    }
 	  } 
+	    
+	    
+	  //}
 	}
       }
-    
+      //}
 
     }
     

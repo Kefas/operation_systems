@@ -1,0 +1,23 @@
+
+pisarz:
+
+P(pisarz)
+pisanie()
+V(pisarz)
+
+
+czytelnik
+
+P(czytelnik)
+n_czytelnik++
+if n_czytelnik = 1
+  P(pisarz)
+V(czytelnik)
+
+czytanie()
+
+P(czytelnik)
+n_czytelnik--
+if( n_czytelnik = 0)
+   V(pisarz)
+V(czytelnik) 

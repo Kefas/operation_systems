@@ -1,0 +1,36 @@
+kindergarten(0) - semafor ogolny
+adult, child, enter - semafory binarne
+
+
+child:
+
+P(kindergarten)
+mutex_l(enter)
+n_child++
+mutex_u(enter)
+
+...
+
+mutex_l(enter)
+n_child--
+mutex_u(enter)
+V(kindergarten)
+
+
+adult:
+
+mutex_l(enter)
+V(kindergarten)
+V(kindergarten)
+V(kindergarten)
+n_adults++
+mutex_u(enter)
+
+....
+
+P(kindergarten)
+P(kindergarten)
+P(kindergarten)
+mutex_l(enter)
+n_adults--
+mutex_u(enter)

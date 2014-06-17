@@ -1,0 +1,41 @@
+man, woman, sex - binarne semafory
+bathroom(3) - calkowity
+
+
+wątek man:
+
+
+P(man)
+n_man++
+if(n_man = 1)
+  P(sex)
+P(bathroom)
+V(man)
+
+...
+
+P(man)
+V(bathroom)
+n_man--
+if(n_man=0)
+  V(sex)
+V(man)
+
+
+wątek woman:
+
+P(woman)
+n_woman++
+if(n_woman = 1)
+  P(sex)
+P(bathroom)
+V(woman)
+
+...
+
+P(woman)
+V(bathroom)
+n_woman--
+if(n_woman=0)
+  V(sex)
+V(woman)
